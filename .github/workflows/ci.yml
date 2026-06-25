@@ -1,0 +1,42 @@
+# Goal - I have to Lint, Build, Test the code for Frontend, Backend. Then push the images to DockerHub.
+
+name: CI
+
+on:
+  push:
+    branches:
+
+jobs:
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v7
+
+      - name: Setup NodeJs
+        uses: actions/setup-no@v6
+        with:
+          node-version-file: '20'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install npm Package
+        run: npm ci
+
+      - name: Run Linter
+        run: npm run lint
+
+      # - Test
+      # - Push
+
+
+  backend:
+    steps:
+      - Lint
+      - Build
+      - Test
+      - Push
+
+  
+
+
