@@ -24,8 +24,6 @@ RUN npm install -g vite@5 && npm cache clean --force
 
 COPY --from=builder /app/dist ./dist
 
-COPY vite.preview.config.js  ./vite.config.js
-
 EXPOSE 4173
 
 CMD ["vite","preview", "--host", "0.0.0.0", "--port", "4173"]
