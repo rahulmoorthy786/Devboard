@@ -7,7 +7,8 @@ on:
         workflows: ['CI']
         types: [completed]
         branches:
-            - 'advanced'
+            - advanced
+    workflow_dispatch:        
 
 jobs:
   deploy:
