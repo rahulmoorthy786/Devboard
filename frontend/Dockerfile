@@ -20,10 +20,13 @@ FROM node:24-alpine AS runner
 
 WORKDIR /app
 
-RUN npm install -g vite@5 && npm cache clean --force
+COPY package*.json ./
+COPY vite.config.js ./
+
+RUN npm ci
 
 COPY --from=builder /app/dist ./dist
 
 EXPOSE 4173
 
-CMD ["vite","preview", "--host", "0.0.0.0", "--port", "4173"]
+CMD ["npx","vite","preview","--host","0.0.0.0","--port","4173"]
