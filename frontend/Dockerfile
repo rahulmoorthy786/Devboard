@@ -23,7 +23,7 @@ WORKDIR /app
 COPY package*.json ./
 COPY vite.config.js ./
 
-RUN npm ci
+RUN npm ci  --legacy-peer-deps
 
 COPY --from=builder /app/dist ./dist
 
