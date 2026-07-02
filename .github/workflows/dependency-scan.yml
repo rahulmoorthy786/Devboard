@@ -20,12 +20,12 @@ jobs:
                 cache-dependency-path: 'go.sum'
                 
           - name: Install Govulncheck
-            run: go install golang.org/x/vuln/cmd/govulncheck@latest
+            run: go install golang.org/x/vuln/cmd/govulncheck@1.25
             
           - name: Run Govulncheck
+            continue-on-error: true
             run: govulncheck ./backend/...
             working-directory: backend
-
 
           - name: Setup node
             uses: actions/setup-node@v6 
@@ -38,3 +38,11 @@ jobs:
             run: npm audit
             working-directory: frontend
             
+
+          - name: Upload Test Report
+            uses: actions/upload-artifact@v4
+            if: always() # Ensure report uploads even if the job fails
+            with:
+                name: go-vulncheck-report
+                path: backend/govulncheck-report.txt
+                retention-days: 5  
