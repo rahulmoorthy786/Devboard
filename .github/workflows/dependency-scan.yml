@@ -15,7 +15,7 @@ jobs:
           - name: Setup Go
             uses: actions/setup-go@v6 
             with:
-                go-version: '1.23'
+                go-version: '1.22'
                 go-version-file: 'go.mod'
                 cache-dependency-path: 'go.sum'
                 
@@ -40,9 +40,9 @@ jobs:
             
 
           - name: Upload Test Report
-            uses: actions/upload-artifact@v4
             if: always() # Ensure report uploads even if the job fails
+            uses: actions/upload-artifact@v4
             with:
                 name: job-report
                 path: reports/govulncheck-report.txt
-                retention-days: 5  
+                retention-days: 5
